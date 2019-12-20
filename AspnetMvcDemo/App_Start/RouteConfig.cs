@@ -14,17 +14,17 @@ namespace AspnetMvcDemo
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                name: "PagesDefault",
-                url: "{controller}/{action}/{id}",
-                defaults: new { id = UrlParameter.Optional },
-                namespaces: new[] { "AspnetMvcDemo.Controllers" }
-            ).DataTokens["UseNamespaceFallback"] = false;
-
-            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Authentication", action = "Login", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+                name: "PagesDefault",
+                url: "Pages/{controller}/{action}/{id}",
+                defaults: new { id = UrlParameter.Optional },
+                namespaces: new[] { "AspnetMvcDemo.Controllers.Pages" }
+            ).DataTokens["UseNamespaceFallback"] = false;
         }
     }
 }

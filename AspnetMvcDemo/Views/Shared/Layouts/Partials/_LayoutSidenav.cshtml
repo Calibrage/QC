@@ -26,7 +26,20 @@
         <li class="sidenav-item@(currentPage == "/Home/Home" ? " active" : "")">
             <a href="@Url.RouteUrl("Default", new { action = "Home", controller = "Home" })" class="sidenav-link"><i class="sidenav-icon ion ion-md-home"></i><div>Home</div></a>
         </li>
-        
+
+        <!-- Reports -->
+        <li class="sidenav-item@(currentPage.StartsWith("/Reports/") || currentPage == "/" ? " active open" : "")">
+            <a href="javascript:void(0)" class="sidenav-link sidenav-toggle"><i class="sidenav-icon ion ion-md-report"></i><div>Reports</div></a>
+            <ul class="sidenav-menu">
+                <li class="sidenav-item@(currentPage == "/Reports/ConcreteFactory" || currentPage == "/" ? " active" : "")">
+                    <a href="@Url.RouteUrl("Default", new { action = "ConcreteFactoryReports", controller = "ConcreteFactoryReports" })" class="sidenav-link"><div>Concrete Factory</div></a>
+                </li>
+                <li class="sidenav-item@(currentPage == "/Reports/BlockFactory" ? " active" : "")">
+                    <a href="@Url.RouteUrl("Default", new { action = "BlockFactoryReports", controller = "BlockFactoryReports" })" class="sidenav-link"><div>Block Factory</div></a>
+                </li>
+            </ul>
+        </li>
+
         <!-- Dashboards -->
         <li class="sidenav-item@(currentPage.StartsWith("/Dashboards/") || currentPage == "/" ? " active open" : "")">
             <a href="javascript:void(0)" class="sidenav-link sidenav-toggle"><i class="sidenav-icon ion ion-md-speedometer"></i><div>Dashboards</div></a>

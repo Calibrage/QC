@@ -1,0 +1,91 @@
+﻿
+@{
+    ViewBag.Title = "ConcreteFactoryReports";
+}
+
+@section Styles {
+    @Styles.Render("~/bundle/vendor/css/smartwizard/smartwizard")
+}
+@section Scripts {
+    <!-- Dependencies -->
+    @Scripts.Render("~/bundle/vendor/js/smartwizard/smartwizard")
+    @Scripts.Render("~/bundle/vendor/js/validate/validate")
+
+    @Scripts.Render("~/bundle/js/forms_wizard")
+
+    <script src="https://maps.google.com/maps/api/js?key=AIzaSyBe4r21LOoFNKUy6Dv3o4H16ozLT473wvs"></script>
+    @Scripts.Render("~/bundle/vendor/js/gmaps/gmaps")
+
+    @Scripts.Render("~/bundle/js/charts_gmaps")
+}
+
+
+<body style="background-image: url('/Images/09a43040-4292-4c73-a487-2be5378d612f.jpg'); background-size: cover;">
+    <h2>ConcreteFactoryReports</h2>
+    <hr class="container-m-nx border-light my-4">
+    @*<h6 class="text-muted small font-weight-bold py-3 my-4">
+            With icon
+        </h6>*@
+    <div id="smartwizard-2" class="smartwizard-example">
+        <ul>
+            <li>
+                <a href="#smartwizard-2-step-1" class="mb-3">
+                    <span class="sw-done-icon ion ion-md-checkmark"></span>
+                    <span class="sw-icon ion ion-ios-keypad"></span>
+                    Step1
+                    <div class="text-muted small">Set up shortcuts</div>
+                </a>
+            </li>
+            <li>
+                <a href="#smartwizard-2-step-2" class="mb-3">
+                    <span class="sw-done-icon ion ion-md-checkmark"></span>
+                    <span class="sw-icon ion ion-ios-color-wand"></span>
+                    Step2
+                    <div class="text-muted small">Add effects</div>
+                </a>
+            </li>
+            <li>
+                <a href="#smartwizard-2-step-3" class="mb-3">
+                    <span class="sw-done-icon ion ion-md-checkmark"></span>
+                    <span class="sw-icon ion ion-md-copy"></span>
+                    Step3
+                    <div class="text-muted small">Select pager options</div>
+                </a>
+            </li>
+            <li>
+                <a href="#smartwizard-2-step-4" class="mb-3">
+                    <span class="sw-done-icon ion ion-md-checkmark"></span>
+                    <span class="sw-icon ion ion-md-notifications-outline"></span>
+                    Step4
+                    <div class="text-muted small">Set up notifications</div>
+                </a>
+            </li>
+        </ul>
+        <div class="mb-3">
+            <div id="smartwizard-2-step-1" class="card animated fadeIn">
+                <div class="card-body">
+                    Step Content 1
+                </div>
+            </div>
+            <div id="smartwizard-2-step-2" class="card animated fadeIn">
+                <div class="card-body">
+                    Step Content 2
+                </div>
+            </div>
+            <div id="smartwizard-2-step-3" class="card animated fadeIn">
+                <div class="card-body">
+                    Step Content 3
+                </div>
+            </div>
+            <div id="smartwizard-2-step-4" class="card animated fadeIn">
+                <div class="card-body">
+                    Step Content 4
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr class="container-m-nx border-light mt-0 mb-5">
+
+<div id="gmaps-example" style="height: 400px; width: 100%;"></div>
+</body>
