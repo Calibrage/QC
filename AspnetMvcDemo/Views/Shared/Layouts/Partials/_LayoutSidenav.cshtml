@@ -28,13 +28,13 @@
         </li>
 
         <!-- Reports -->
-        <li class="sidenav-item@(currentPage.StartsWith("/Reports/") || currentPage == "/" ? " active open" : "")">
-            <a href="javascript:void(0)" class="sidenav-link sidenav-toggle"><i class="sidenav-icon ion ion-md-report"></i><div>Reports</div></a>
+        <li class="sidenav-item@(currentPage.StartsWith("/ConcreteFactoryReports/") || currentPage.StartsWith("/BlockFactoryReports/") ? " active open" : "")">
+            <a href="javascript:void(0)" class="sidenav-link sidenav-toggle"><i class="sidenav-icon ion ion-md-git-compare"></i><div>Reports</div></a>
             <ul class="sidenav-menu">
-                <li class="sidenav-item@(currentPage == "/Reports/ConcreteFactory" || currentPage == "/" ? " active" : "")">
+                <li class="sidenav-item@(currentPage == "/ConcreteFactoryReports/ConcreteFactoryReports" ? " active" : "")">
                     <a href="@Url.RouteUrl("Default", new { action = "ConcreteFactoryReports", controller = "ConcreteFactoryReports" })" class="sidenav-link"><div>Concrete Factory</div></a>
                 </li>
-                <li class="sidenav-item@(currentPage == "/Reports/BlockFactory" ? " active" : "")">
+                <li class="sidenav-item@(currentPage == "/BlockFactoryReports/BlockFactoryReports" ? " active" : "")">
                     <a href="@Url.RouteUrl("Default", new { action = "BlockFactoryReports", controller = "BlockFactoryReports" })" class="sidenav-link"><div>Block Factory</div></a>
                 </li>
             </ul>
