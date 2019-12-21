@@ -1,0 +1,620 @@
+﻿
+@{
+    ViewBag.Title = "CreateFactory";
+    Layout = "~/Views/Shared/Layouts/_LayoutBlank.cshtml";
+}
+
+@section Scripts {
+    <!-- Dependencies -->
+    @Scripts.Render("~/bundle/vendor/js/validate/validate")
+
+    <script src="https://maps.google.com/maps/api/js?key=AIzaSyBe4r21LOoFNKUy6Dv3o4H16ozLT473wvs"></script>
+    @Scripts.Render("~/bundle/vendor/js/gmaps/gmaps")
+
+    @*@Scripts.Render("~/bundle/js/charts_gmaps")*@
+}
+
+<style type="text/css">
+    .nav-tabs-top {
+        -ms-flex-direction: column;
+        flex-direction: column;
+        margin-top: 0px;
+        padding-left: 100px;
+        padding-right: 100px;
+    }
+
+    .table {
+        border-bottom: solid 2px #eeeeee;
+    }
+
+    .col-md-2 {
+        flex: 0 0 16.66667%;
+        max-width: 16.66667%;
+        text-align: left;
+        vertical-align: text-bottom;
+    }
+
+    #gmaps-example {
+        height: 400px !important;
+        width: 100% !important;
+    }
+
+    .switcher-label {
+        color: #141514;
+    }
+
+    .card-text:last-child {
+        margin-bottom: 0;
+        margin-top: 25px;
+    }
+
+    .page-header {
+        padding: 70px 50px 100px 0px;
+    }
+
+</style>
+
+<script type="text/javascript">
+
+    function initialize() {
+        document.getElementById("lat").value = 24.7136;
+        document.getElementById("lon").value = 46.6753;
+        var myLatLng = new google.maps.LatLng(24.7136, 46.6753),
+            myOptions = {
+                zoom: 13,
+                center: myLatLng,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            },
+            map = new google.maps.Map(document.getElementById('gmaps-example'), myOptions),
+            marker = new google.maps.Marker({ position: myLatLng, map: map });
+
+        marker.setMap(map);
+        //moveBus(map, marker);
+
+        google.maps.event.addListener(map, "click", function (event) {
+            // get lat/lon of click
+            var clickLat = event.latLng.lat();
+            var clickLon = event.latLng.lng();
+
+            // show in input box
+            document.getElementById("lat").value = clickLat.toFixed(3);
+            document.getElementById("lon").value = clickLon.toFixed(3);
+
+            if (marker && marker.setMap) {
+                marker.setMap(null);
+            }
+            marker = new google.maps.Marker({
+                position: new google.maps.LatLng(clickLat, clickLon),
+                map: map
+            });
+
+            marker.setMap(map);
+        });
+    }
+
+    $('document').ready(function () {
+        initialize();
+    });
+
+</script>
+
+<body style="background-image: url('/Images/09a43040-4292-4c73-a487-2be5378d612f.jpg'); background-size: cover;">
+    <div class="page-header">
+        Create Factory
+    </div>
+    <div class="nav-tabs-top nav-responsive-xl">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#navs-top-responsive-link-1">Factory Info</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#navs-top-responsive-link-2">Location</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#navs-top-responsive-link-3">Owner Info</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#navs-top-responsive-link-4">Attachments</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane fade show active" id="navs-top-responsive-link-1">
+                <div class="card-body">
+                    <form class="my-5">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label class="form-label">Factory Name</label>
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <input type="text" class="form-control">
+                            </div>
+                            <div class="col-md-2">
+                                <label class="form-label">Work Type</label>
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <select class="form-control">
+                                    <option selected="selected">-- Select Work Type --</option>
+                                    <option>Manual</option>
+                                    <option>Semi-Atuomatic</option>
+                                    <option>Atuomatic</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-2 form-group">
+                                <label class="form-label">Produce Power</label>
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <input class="form-control" type="number" />
+                            </div>
+                            <div class="col-md-2 form-group">
+                                <label class="form-label">Average Daily Production</label>
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <input class="form-control" type="number" />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-2 form-group">
+                                <label class="form-label">Total Mixers Number</label>
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <input class="form-control" type="number" />
+                            </div>
+                            <div class="col-md-2 form-group">
+                                <label class="form-label">Total Truckers Number</label>
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <input class="form-control" type="number" />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-2 form-group">
+                                <label class="form-label">Factory Phone Number </label>
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <input class="form-control" type="text" />
+                            </div>
+                            <div class="col-md-2 form-group">
+                                <label class="form-label">Factory Fax </label>
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <input class="form-control" type="text" />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-2 form-group">
+                                <label class="form-label">Factory Phone Number </label>
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <input class="form-control" type="text" />
+                            </div>
+                            <div class="col-md-2 form-group">
+                                <label class="form-label">Factory Fax </label>
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <input class="form-control" type="text" />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-2 form-group">
+                                <label class="form-label">Post Code </label>
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <input class="form-control" type="text" />
+                            </div>
+                            <div class="col-md-2 form-group">
+                                <label class="form-label">Factory Email  </label>
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <input class="form-control" type="email" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            @*<div id="gmaps-example" style="height:400px; width:100% !important"></div>*@
+            <div class="tab-pane fade" id="navs-top-responsive-link-2">                
+                <div class="card-body">
+                    <div id="gmaps-example" style="height:400px !important; width:100% !important"></div>
+                    <div class="card-text">
+                        <div class="row" style="border-top:25px;">
+                            <div class="col-md-2 form-group">
+                                <label class="form-label">Latitude</label>
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <input type="text" class="form-control" id="lat" />
+                            </div>
+                            <div class="col-md-2 form-group">
+                                <label class="form-label">Longitude</label>
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <input type="text" class="form-control" id="lon" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="navs-top-responsive-link-3">
+                <div class="card-body">
+                    <form class="my-5">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label class="form-label">Owner Name </label>
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <input type="text" class="form-control">
+                            </div>
+                            <div class="col-md-2">
+                                <label class="form-label">Owner Email </label>
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <input type="email" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-2 form-group">
+                                <label class="form-label">Owner Phone Number </label>
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <input class="form-control" type="text" />
+                            </div>
+                            @*<div class="col-md-2 form-group">
+                                <label class="form-label">Manager  Name </label>
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <input class="form-control" type="number" />
+                            </div>*@
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-2 form-group">
+                                <label class="form-label">Manager  Name </label>
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <input class="form-control" type="text" />
+                            </div>
+                            <div class="col-md-2 form-group">
+                                <label class="form-label">Manager  Email </label>
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <input class="form-control" type="email" />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-2 form-group">
+                                <label class="form-label">Manager  PhoneNumber </label>
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <input class="form-control" type="text" />
+                            </div>
+                            <div class="col-md-2 form-group">
+                                <label class="form-label">Manager Experience (years)</label>
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <input class="form-control" type="number" />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-2 form-group">
+                                <label class="form-label">Quality Engineer Name </label>
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <input class="form-control" type="text" />
+                            </div>
+                            <div class="col-md-2 form-group">
+                                <label class="form-label">Quality Engineer  Email </label>
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <input class="form-control" type="email" />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-2 form-group">
+                                <label class="form-label">Quality Engineer  PhoneNumber </label>
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <input class="form-control" type="text" />
+                            </div>
+                            <div class="col-md-2 form-group">
+                                <label class="form-label">Quality Engineer Experience (years) </label>
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <input class="form-control" type="number" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="navs-top-responsive-link-4">
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>File Name</th>
+                                <th>Attached</th>
+                                <th>Not Attached</th>
+                                <th>Note</th>
+                                <th>Upload</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Municipality license</td>
+                                <td>
+                                    <div class="form-group">
+                                        <label class="switcher">
+                                            <input type="checkbox" class="switcher-input is-valid">
+                                            <span class="switcher-indicator">
+                                                <span class="switcher-no"></span>
+                                                <span class="switcher-yes"></span>
+                                            </span>
+                                            <span class="switcher-label" style="color:black !important">Attached</span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <label class="switcher">
+                                            <input type="checkbox" class="switcher-input is-valid" checked>
+                                            <span class="switcher-indicator">
+                                                <span class="switcher-yes"></span>
+                                                <span class="switcher-no"></span>
+                                            </span>
+                                            <span class="switcher-label" style="color:black !important">Not Attached</span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <input class="form-control" type="text" />
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <input class="form-control" name="file" type="file" multiple>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Industrial license</td>
+                                <td>
+                                    <div class="form-group">
+                                        <label class="switcher">
+                                            <input type="checkbox" class="switcher-input is-valid">
+                                            <span class="switcher-indicator">
+                                                <span class="switcher-no"></span>
+                                                <span class="switcher-yes"></span>
+                                            </span>
+                                            <span class="switcher-label" style="color:black !important">Attached</span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <label class="switcher">
+                                            <input type="checkbox" class="switcher-input is-valid" checked>
+                                            <span class="switcher-indicator">
+                                                <span class="switcher-yes"></span>
+                                                <span class="switcher-no"></span>
+                                            </span>
+                                            <span class="switcher-label" style="color:black !important">Not Attached</span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <input class="form-control" type="text" />
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <input class="form-control" name="file" type="file" multiple>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Commercial Register</td>
+                                <td>
+                                    <div class="form-group">
+                                        <label class="switcher">
+                                            <input type="checkbox" class="switcher-input is-valid">
+                                            <span class="switcher-indicator">
+                                                <span class="switcher-no"></span>
+                                                <span class="switcher-yes"></span>
+                                            </span>
+                                            <span class="switcher-label" style="color:black !important">Attached</span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <label class="switcher">
+                                            <input type="checkbox" class="switcher-input is-valid" checked>
+                                            <span class="switcher-indicator">
+                                                <span class="switcher-yes"></span>
+                                                <span class="switcher-no"></span>
+                                            </span>
+                                            <span class="switcher-label" style="color:black !important">Not Attached</span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <input class="form-control" type="text" />
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <input class="form-control" name="file" type="file" multiple>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Calibration certificates</td>
+                                <td>
+                                    <div class="form-group">
+                                        <label class="switcher">
+                                            <input type="checkbox" class="switcher-input is-valid">
+                                            <span class="switcher-indicator">
+                                                <span class="switcher-no"></span>
+                                                <span class="switcher-yes"></span>
+                                            </span>
+                                            <span class="switcher-label" style="color:black !important">Attached</span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <label class="switcher">
+                                            <input type="checkbox" class="switcher-input is-valid" checked>
+                                            <span class="switcher-indicator">
+                                                <span class="switcher-yes"></span>
+                                                <span class="switcher-no"></span>
+                                            </span>
+                                            <span class="switcher-label" style="color:black !important">Not Attached</span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <input class="form-control" type="text" />
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <input class="form-control" name="file" type="file" multiple>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>ISO certificates</td>
+                                <td>
+                                    <div class="form-group">
+                                        <label class="switcher">
+                                            <input type="checkbox" class="switcher-input is-valid">
+                                            <span class="switcher-indicator">
+                                                <span class="switcher-no"></span>
+                                                <span class="switcher-yes"></span>
+                                            </span>
+                                            <span class="switcher-label" style="color:black !important">Attached</span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <label class="switcher">
+                                            <input type="checkbox" class="switcher-input is-valid" checked>
+                                            <span class="switcher-indicator">
+                                                <span class="switcher-yes"></span>
+                                                <span class="switcher-no"></span>
+                                            </span>
+                                            <span class="switcher-label" style="color:black !important">Not Attached</span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <input class="form-control" type="text" />
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <input class="form-control" name="file" type="file" multiple>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>performance sign</td>
+                                <td>
+                                    <div class="form-group">
+                                        <label class="switcher">
+                                            <input type="checkbox" class="switcher-input is-valid">
+                                            <span class="switcher-indicator">
+                                                <span class="switcher-no"></span>
+                                                <span class="switcher-yes"></span>
+                                            </span>
+                                            <span class="switcher-label" style="color:black !important">Attached</span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <label class="switcher">
+                                            <input type="checkbox" class="switcher-input is-valid" checked>
+                                            <span class="switcher-indicator">
+                                                <span class="switcher-yes"></span>
+                                                <span class="switcher-no"></span>
+                                            </span>
+                                            <span class="switcher-label" style="color:black !important">Not Attached</span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <input class="form-control" type="text" />
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <input class="form-control" name="file" type="file" multiple>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>The design mixture used</td>
+                                <td>
+                                    <div class="form-group">
+                                        <label class="switcher">
+                                            <input type="checkbox" class="switcher-input is-valid">
+                                            <span class="switcher-indicator">
+                                                <span class="switcher-no"></span>
+                                                <span class="switcher-yes"></span>
+                                            </span>
+                                            <span class="switcher-label" style="color:black !important">Attached</span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <label class="switcher">
+                                            <input type="checkbox" class="switcher-input is-valid" checked>
+                                            <span class="switcher-indicator">
+                                                <span class="switcher-yes"></span>
+                                                <span class="switcher-no"></span>
+                                            </span>
+                                            <span class="switcher-label" style="color:black !important">Not Attached</span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <input class="form-control" type="text" />
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <input class="form-control" name="file" type="file" multiple>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-success">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+

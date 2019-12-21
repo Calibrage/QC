@@ -216,6 +216,7 @@
     <Compile Include="Controllers\ChartsController.cs" />
     <Compile Include="Controllers\CompleteUiController.cs" />
     <Compile Include="Controllers\ConcreteFactoryReportsController.cs" />
+    <Compile Include="Controllers\CreateFactoryController.cs" />
     <Compile Include="Controllers\DashboardsController.cs" />
     <Compile Include="Controllers\FormsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -535,6 +536,7 @@
     <Content Include="Views\Home\Home.cshtml" />
     <Content Include="Views\Reports\ConcreteFactoryReports.cshtml" />
     <Content Include="Views\Reports\BlockFactoryReports.cshtml" />
+    <Content Include="Views\CreateFactory\CreateFactory.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
