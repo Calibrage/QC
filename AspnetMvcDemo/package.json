@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "jquery-validation-unobtrusive": "~3.2.11",
-    "@claviska/jquery-minicolors": "~2.3.2",
+    "@claviska/jquery-minicolors": "~2.3.6",
     "animate.css": "~3.7.0",
     "blueimp-gallery": "~2.35.0",
     "bootstrap": "~4.3.1",
